@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  golang:
+    container_name: golang-runtime
+    build:
+      context: ./
+    volumes:
+      - ${PWD}:/app
+    working_dir: /app
+    entrypoint: /bin/sh
+    stdin_open: true
+    tty: true
+    ports:
+      - 8000:8000
+      - 5000:5000
+      - 3000:3000
