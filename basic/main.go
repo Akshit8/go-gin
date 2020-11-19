@@ -1,28 +1,63 @@
 package main
 
 import (
-	"net/http"
-	"fmt"
+	"encoding/json"
 	"log"
-	"io/ioutil"
+	"net/http"
+	"math/random"
+	"strconv"
+	"github.com/gorilla/mux"
 )
 
+// Book struct (Model)
+type Book struct {
+	ID		string	`json:"id"`
+	Isbn	string	`json:"isbn"`
+	Title	string	`json:"title"`
+	Author	*Author	`json:"author"`
+}
+
+// Author Struct
+type Author struct {
+	Firstname	string	`json:"firstname"`
+	Lastname	string	`json:"lastname"`
+}
+
+// Get all books
+func getBooks(w http.ResponseWriter, r *http.Request) {
+
+}
+
+// Get a single book 
+func getBook(w http.ResponseWriter, r *http.Request) {
+	
+}
+
+// Create a new book
+func createBook(w http.ResponseWriter, r *http.Request) {
+	
+}
+
+// Update a book
+func updateBook(w http.ResponseWriter, r *http.Request) {
+	
+}
+
+// Delete a book
+func deleteBook(w http.ResponseWriter, r *http.Request) {
+	
+}
+
 func main() {
-	// have deafult route behaviour
-	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-		// for logging to console
-		log.Println("Hello World!")
-		d, _ := ioutil.ReadAll(r.Body)
-		if err != nil {
-			http.Error(rw, "error", http.StatusBadRequest)
-			return
-		}
-		fmt.Fprintf(rw, "Hello %s\n", d)
-	})
+	// Init router
+	r := mux.NewRouter()
 
-	http.HandleFunc("/api", func(http.ResponseWriter, *http.Request) {
-		log.Println("api is hit")
-	})
+	// Route handlers / Endpoints
+	r.HandleFunc("/api/books", getBooks).Methods("GET")
+	r.HandleFunc("/api/books/{id}", getBook).Methods("GET")
+	r.HandleFunc("/api/books", createBook).Methods("POST")
+	r.HandleFunc("/api/books/{id}", updateBook).Methods("PUT")
+	r.HandleFunc("/api/books/{id}", deleteBook).Methods("DELETE")
 
-	http.ListenAndServe(":8000", nil)
+	log.Fatal(http.ListenAndServe(":8000", r))
 }
