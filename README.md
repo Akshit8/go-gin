@@ -1,7 +1,7 @@
 # golang
 
 ## golang runtime in docker
-```
+```bash
 image used = golang:1.15-alpine
 
 # installing dependencies manually

@@ -14,4 +14,13 @@ func main() {
         &Dp{3, 4}
     }
     fmt.Println(a[0].x, a[1].x)
+
+    newStructDeclare := struct {
+        x int
+        y float32
+    }{
+        8,
+        9.64,
+    }
+    fmt.Println(newStructDeclare);
 }
