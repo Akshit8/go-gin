@@ -14,7 +14,7 @@ go get -u github.com/gorilla/mux
 ## Intellisense with docker and vscode
 install <b>Remote-Container</b> extension in vscode
 <br>
-mount go-dump folder to GOPATH of docker-container for dependency persistence
+mount go-dump folder to GOPATH of docker-container for dependency persistence [Apparently this is not working due to permission issues]
 <br>
 install and configure vscode <b>go extension</b> with it's analytics tool
 <br>
@@ -24,3 +24,18 @@ install and configure vscode <b>go extension</b> with it's analytics tool
 click remote icon<br>
 attatch to a running container<br>
 navigate to source dir
+
+## Setting the editor
+```bash
+create a file .vscode > setting.json
+
+# for auto-import package
+"go.autocompleteUnimportedPackages": true,
+
+# for go docs
+# guru is doc package
+"go.docsTool": "guru"
+```
+
+## References
+https://code.visualstudio.com/docs/languages/go

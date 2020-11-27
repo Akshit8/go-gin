@@ -7,7 +7,7 @@ services:
       context: ./
     volumes:
       - ${PWD}:/app
-      - ${PWD}/go-dump:/go
+#      - ${PWD}/go-dump:/go
     working_dir: /app
     entrypoint: /bin/sh
     stdin_open: true
