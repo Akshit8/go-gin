@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"text/template"
 	"io"
@@ -25,7 +26,7 @@ func defaultHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func dogHandler(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "dog handler ran")
+	fmt.Fprintln(w, "dog handler ran")
 }
 
 func meHandler(w http.ResponseWriter, req *http.Request) {
