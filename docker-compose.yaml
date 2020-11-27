@@ -7,6 +7,7 @@ services:
       context: ./
     volumes:
       - ${PWD}:/app
+      - ${PWD}/go-dump:/go
     working_dir: /app
     entrypoint: /bin/sh
     stdin_open: true
@@ -14,4 +15,3 @@ services:
     ports:
       - 8000:8000
       - 5000:5000
-      - 3000:3000
