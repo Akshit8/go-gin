@@ -13,7 +13,7 @@ func main() {
 	// http.HandleFunc("/", defaultHandler)
 	// http.HandleFunc("/dog/", dogHandler)
 	// http.HandleFunc("/me/", meHandler)
-
+	
 	http.Handle("/", http.HandlerFunc(defaultHandler))
 	http.Handle("/dog/", http.HandlerFunc(dogHandler))
 	http.Handle("/me/", http.HandlerFunc(meHandler))
