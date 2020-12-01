@@ -1,5 +1,5 @@
 deafultMessage="deafult message from git script"
-defaultBranch=main
+defaultBranch=master
 
 git add .
 echo "Commit message"
