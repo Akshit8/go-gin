@@ -1,7 +1,7 @@
 {
     "go.autocompleteUnimportedPackages": true,
     // gogetdoc not working
-    "go.docsTool": "guru",
+    "go.docsTool": "godoc",
     "go.lintOnSave": "package",
     "go.formatTool": "gofmt"
 }
