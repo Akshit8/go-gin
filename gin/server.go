@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"net/http"
 	"os"
 
 	"github.com/Akshit8/gin/controller"
@@ -59,7 +60,18 @@ func main() {
 	})
 
 	server.POST("/video", func(ctx *gin.Context) {
-		ctx.JSON(201, videoController.Save(ctx))
+		err := videoController.Save(ctx)
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{
+				"success": false,
+				"error": err.Error(),
+			})
+			return
+		}
+		ctx.JSON(http.StatusCreated, gin.H{
+			"success": true,
+			"message": "video created successfully",
+		})
 	})
 
 	server.Run(":8000")
