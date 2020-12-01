@@ -59,4 +59,3 @@ func handleError(w http.ResponseWriter, err error) {
 		log.Fatalln(err)
 	}
 }
-
