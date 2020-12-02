@@ -88,5 +88,6 @@ func main() {
 		})
 	}
 
-	server.Run(":8000")
+	port := os.Getenv("PORT")
+	server.Run(":" + port)
 }
