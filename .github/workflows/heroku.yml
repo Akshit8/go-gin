@@ -24,6 +24,7 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - uses: akhileshns/heroku-deploy@v3.6.8
