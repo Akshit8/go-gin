@@ -11,8 +11,8 @@ type person struct {
 
 // Video struct
 type Video struct {
-	Title       string `json:"title" binding:"min=2,max=10" validate:"titleCool"`
-	Description string `json:"description" binding:"max=20"`
+	Title       string `json:"title" binding:"min=2,max=20" validate:"titleCool"`
+	Description string `json:"description" binding:"max=50"`
 	URL         string `json:"url" binding:"required,url"`
 	Author      person `json:"author" binding:"required"`
 }

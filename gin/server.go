@@ -16,7 +16,7 @@ import (
 func setupLogOutput() {
 	f, _ := os.Create("gin.log")
 	// logs to both log files and unix stdout
-	// io.MultiWriter - MultiWriter creates a writer that duplicates 
+	// io.MultiWriter - MultiWriter creates a writer that duplicates
 	// its writes to all the provided writers, similar to the Unix tee(1) command.
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 }
@@ -43,7 +43,8 @@ func main() {
 	server.Use(middlewares.Logger())
 
 	// basic middleware auth
-	server.Use(middlewares.BasicAuth())
+	// server.Use(middlewares.BasicAuth())
+	// shift to api group
 
 	// enabling cors
 	server.Use(cors.Default())
@@ -55,24 +56,37 @@ func main() {
 	// can also club middlewares
 	// server.Use(gin.Recovery(), middlewares.Logger(), middlewares.BasicAuth())
 
-	server.GET("/videos", func(ctx *gin.Context) {
-		ctx.JSON(200, videoController.FindAll())
-	})
+	// serving static files and html templates
+	server.Static("/css", "./templates/css")
+	server.LoadHTMLGlob("templates/*.html")
 
-	server.POST("/video", func(ctx *gin.Context) {
-		err := videoController.Save(ctx)
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"success": false,
-				"error": err.Error(),
-			})
-			return
-		}
-		ctx.JSON(http.StatusCreated, gin.H{
-			"success": true,
-			"message": "video created successfully",
+	viewRoute := server.Group("/view")
+	{
+		viewRoute.GET("/videos", videoController.ShowAll)
+	}
+
+	// grouping multi-route grouping
+	apiRoute := server.Group("/api", middlewares.BasicAuth())
+	{
+		apiRoute.GET("/videos", func(ctx *gin.Context) {
+			ctx.JSON(200, videoController.FindAll())
 		})
-	})
+
+		apiRoute.POST("/video", func(ctx *gin.Context) {
+			err := videoController.Save(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{
+					"success": false,
+					"error":   err.Error(),
+				})
+				return
+			}
+			ctx.JSON(http.StatusCreated, gin.H{
+				"success": true,
+				"message": "video created successfully",
+			})
+		})
+	}
 
 	server.Run(":8000")
 }
