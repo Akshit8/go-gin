@@ -1,8 +1,6 @@
-deafultMessage="deafult message from git script"
+defaultMessage="deafult message from git script"
 defaultBranch=master
 
 git add .
-echo "Commit message"
-read $commit
-git commit -m "${commit:-$deafultMessage}"
+git commit -m "${1:-$defaultMessage}"
 git push origin "${2:-$defaultBranch}"
