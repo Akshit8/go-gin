@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 
 	"github.com/Akshit8/gin/controller"
@@ -59,6 +61,11 @@ func main() {
 	// serving static files and html templates
 	server.Static("/css", "./templates/css")
 	server.LoadHTMLGlob("templates/*.html")
+
+	server.GET("/", func(c *gin.Context) {
+		location := url.URL{Path: "/view/videos"}
+		c.Redirect(http.StatusFound, location.RequestURI())
+	})
 
 	viewRoute := server.Group("/view")
 	{
