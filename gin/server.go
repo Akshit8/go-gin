@@ -23,7 +23,11 @@ func setupLogOutput() {
 }
 
 var videoService service.VideoService = service.New()
+var loginService service.LoginService = service.NewLoginService()
+var jwtService service.JWTService = service.NewJWTService()
+
 var videoController controller.VideoController = controller.New(videoService)
+var loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
 
 func main() {
 	// set gin application mode release/debug
@@ -66,13 +70,27 @@ func main() {
 		c.Redirect(http.StatusFound, location.RequestURI())
 	})
 
+	// Login Endpoint: Authentication + Token creation
+	server.POST("/login", func(ctx *gin.Context) {
+		token := loginController.Login(ctx)
+		if token != "" {
+			ctx.JSON(http.StatusOK, gin.H{
+				"token": token,
+			})
+		} else {
+			ctx.JSON(http.StatusBadRequest, nil)
+		}
+	})
+
+	// The "/view" endpoints are public (no Authorization required)
 	viewRoute := server.Group("/view")
 	{
 		viewRoute.GET("/videos", videoController.ShowAll)
 	}
 
 	// grouping multi-route grouping
-	apiRoute := server.Group("/api", middlewares.BasicAuth())
+	// JWT Authorization Middleware applies to "/api" only.
+	apiRoute := server.Group("/api", middlewares.AuthorizeJWT())
 	{
 		apiRoute.GET("/videos", func(ctx *gin.Context) {
 			ctx.JSON(200, videoController.FindAll())
@@ -95,5 +113,8 @@ func main() {
 	}
 
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
 	server.Run(":" + port)
 }
