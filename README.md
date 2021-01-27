@@ -3,6 +3,7 @@ Rest API with go with good practices using gin, gorm and swagger
 
 ## Makefile specs
 - **git** - git add - commit - push commands
+- **start** - runs the main.go file
 
 ## References
 

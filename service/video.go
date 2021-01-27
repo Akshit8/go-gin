@@ -5,7 +5,7 @@ import "github.com/Akshit8/go-gin/entity"
 
 // VideoService interface defines availaible methods
 type VideoService interface {
-	Save(*entity.Video) *entity.Video
+	Save(video *entity.Video) *entity.Video
 	FindAll() []*entity.Video
 }
 
