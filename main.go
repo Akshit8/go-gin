@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/Akshit8/go-gin/controller"
+	"github.com/Akshit8/go-gin/middleware"
 	"github.com/Akshit8/go-gin/service"
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +15,16 @@ var (
 )
 
 func main() {
-	server := gin.Default()
+	server := gin.New()
+
+	// need a new impl of gin server to over write existing
+	// logger format
+	server.Use(middleware.Logger())
+
+	// add on middleware
+	// can attach on default gin server
+	// provides basic auth func
+	server.Use(middleware.BasicAuth())
 
 	server.GET("/videos", func(ctx *gin.Context) {
 		ctx.JSON(200, videoController.FindAll())
