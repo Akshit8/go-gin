@@ -28,7 +28,8 @@ type jwtService struct {
 	issuer    string
 }
 
-func newJWTService() JWTService {
+// NewJWTService inits a jwt service
+func NewJWTService() JWTService {
 	return &jwtService{
 		secretKey: getSecretKey(),
 		issuer:    "akshit8.go.gin.com",
