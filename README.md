@@ -1,6 +1,11 @@
 # go-gin
 Rest API with go with good practices using gin, gorm and swagger
 
+## What is an interface?
+Interface in golang provides an easy way to create abstraction between different layers inside our application. It helps to bind different resources loosely to a point where impl of one layer is completely independent of other. It ensures principle of `seperation of concerns`.
+<br>
+An interface neither have any memory associated nor can be pointer by a pointer, for reference see `controller/video.go` **controller** struct. 
+
 ## Makefile specs
 - **git** - git add - commit - push commands
 - **start** - runs the main.go file
