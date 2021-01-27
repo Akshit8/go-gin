@@ -1,4 +1,4 @@
-// Package service implements videos reource service
+// Package service implements video-api servicec
 package service
 
 import "github.com/Akshit8/go-gin/entity"
