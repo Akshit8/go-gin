@@ -12,8 +12,12 @@ import (
 )
 
 var (
-	videoService    service.VideoService       = service.NewVideoService()
+	videoService service.VideoService = service.NewVideoService()
+	jwtService   service.JWTService   = service.NewJWTService()
+	loginService service.LoginService = service.NewLoginService()
+
 	videoController controller.VideoController = controller.NewVideoController(videoService)
+	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
 )
 
 func setLogOutput() {
@@ -40,15 +44,31 @@ func main() {
 	// provides basic auth func
 	// server.Use(middleware.BasicAuth())
 
-	server.Static("/css", "./template/css")
-	server.LoadHTMLGlob("templates/*.html")
+	server.Static("/css", "./ui/css")
+	server.LoadHTMLGlob("ui/*.html")
 
+	// Login Endpoint: Authentication + Token creation
+	server.POST("/login", func(ctx *gin.Context) {
+		token := loginController.Login(ctx)
+		if token != "" {
+			ctx.JSON(http.StatusOK, gin.H{
+				"token": token,
+			})
+		} else {
+			ctx.JSON(http.StatusBadRequest, gin.H{
+				"message": "oops! something went wrong",
+			})
+		}
+	})
+
+	// The "/view" endpoints are public (no Authorization required)
 	viewRoutes := server.Group("/view")
 	{
 		viewRoutes.GET("/videos", videoController.ShowAll)
 	}
 
-	apiRoutes := server.Group("/api")
+	// JWT Authorization Middleware applies to "/api" only.
+	apiRoutes := server.Group("/api", middleware.AuthorizeJWT())
 	{
 		apiRoutes.GET("/videos", func(ctx *gin.Context) {
 			ctx.JSON(200, videoController.FindAll())

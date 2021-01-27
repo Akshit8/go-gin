@@ -30,7 +30,11 @@ func AuthorizeJWT() gin.HandlerFunc {
 			c.AbortWithStatus(http.StatusUnauthorized)
 			return
 		}
-
+		if !token.Valid {
+			log.Printf("invalid token")
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
 		claims := token.Claims.(jwt.MapClaims)
 		log.Println("Claims[Name]: ", claims["name"])
 		log.Println("Claims[Admin]: ", claims["admin"])

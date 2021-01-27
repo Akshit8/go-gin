@@ -32,7 +32,7 @@ func (lc *loginController) Login(ctx *gin.Context) string {
 	var credentials entity.Credentials
 	err := ctx.ShouldBind(&credentials)
 	if err != nil {
-		return err.Error()
+		return ""
 	}
 	isAuthenticated := lc.loginService.Login(credentials.Username, credentials.Password)
 	if isAuthenticated {
