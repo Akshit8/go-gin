@@ -1,0 +1,10 @@
+{
+  "dockerFile": "dev.Dockerfile",
+  "appPort": [
+    "8000:8000"
+  ],
+  "extensions": [
+    "golang.go",
+    "mikey.vscode-fileheader"
+  ]
+}

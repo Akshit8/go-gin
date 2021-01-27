@@ -1,0 +1,30 @@
+{
+  "go.useLanguageServer": true,
+  "go.testOnSave": false,
+  "go.testFlags": ["-v"],
+  "go.lintTool": "golint",
+  "go.lintFlags": [],
+  "go.lintOnSave": "workspace",
+  // "go.autocompleteUnimportedPackages": true,
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll": true
+    },
+    "editor.snippetSuggestions": "none"
+  },
+  "[go.mod]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+    }
+  },
+  "gopls": {
+    "ui.completion.usePlaceholders": false,
+    "ui.diagnostic.staticcheck": true
+  },
+  "fileheader.Author": "Akshit Sadana (akshitsadana@gmail.com)",
+  "fileheader.tpl": "/*\r\n * @File: {file placeholder} \r\n * @Description: {file desc} \r\n * @LastModifiedTime: {updateTime} \r\n * @Author: {author} \r\n */\r\n"
+}
