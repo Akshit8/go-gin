@@ -36,7 +36,7 @@ func NewVideoController(service service.VideoService) VideoController {
 
 func (c *controller) Save(ctx *gin.Context) error{
 	var video entity.Video
-	err := ctx.BindJSON(&video)
+	err := ctx.ShouldBindJSON(&video)
 	if err != nil {
 		log.Print("error in binding")
 		return err

@@ -1,5 +1,5 @@
 # go-gin
-Rest API in **golang** following best practices, built with gin, gorm, swagger and MVC architecture.
+Rest API in **golang** following best practices, built with gin, gorm(sqlite), swagger and MVC architecture.
 
 ## What is an interface?
 Interface in golang provides an easy way to create abstraction between different layers inside our application. It helps to bind different resources loosely to a point where impl of one layer is completely independent of other. It ensures principle of `seperation of concerns`.
