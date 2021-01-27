@@ -12,7 +12,7 @@ type Person struct {
 // Video struct defines fields in video resource
 type Video struct {
 	Title       string `json:"title" binding:"min=2,max=10" validate:"cool"`
-	Description string `json:"description" binding:"max=20"`
+	Description string `json:"description" binding:"max=200"`
 	URL         string `json:"url" binding:"required,url"`
 	Actors      int8   `json:"actors" binding:"gt=2,lt=20"`
 	Author      Person `json:"author"`

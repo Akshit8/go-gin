@@ -24,10 +24,12 @@ func setLogOutput() {
 func main() {
 	server := gin.New()
 
-	server.Use(
-		gin.Recovery(), // recovers from panic and return 500
-		// gindump.Dump(),	// dumps http header/body for both request and response
-	)
+	setLogOutput()
+
+	// recovers from panic and return 500
+	server.Use(gin.Recovery())
+	// dumps http header/body for both request and response
+	// server.Use(gindump.Dump())
 
 	// need a new impl of gin server to over write existing
 	// logger format
@@ -36,24 +38,35 @@ func main() {
 	// add on middleware
 	// can attach on default gin server
 	// provides basic auth func
-	server.Use(middleware.BasicAuth())
+	// server.Use(middleware.BasicAuth())
 
-	server.GET("/videos", func(ctx *gin.Context) {
-		ctx.JSON(200, videoController.FindAll())
-	})
+	server.Static("/css", "./template/css")
+	server.LoadHTMLGlob("templates/*.html")
 
-	server.POST("/videos", func(ctx *gin.Context) {
-		err := videoController.Save(ctx)
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
-		} else {
-			ctx.JSON(http.StatusOK, gin.H{
-				"message": "saved video successfully",
-			})
-		}
-	})
+	viewRoutes := server.Group("/view")
+	{
+		viewRoutes.GET("/videos", videoController.ShowAll)
+	}
+
+	apiRoutes := server.Group("/api")
+	{
+		apiRoutes.GET("/videos", func(ctx *gin.Context) {
+			ctx.JSON(200, videoController.FindAll())
+		})
+
+		apiRoutes.POST("/videos", func(ctx *gin.Context) {
+			err := videoController.Save(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{
+					"error": err.Error(),
+				})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{
+					"message": "saved video successfully",
+				})
+			}
+		})
+	}
 
 	port := os.Getenv("PORT")
 	if port == "" {

@@ -3,6 +3,7 @@ package controller
 
 import (
 	"log"
+	"net/http"
 
 	"github.com/Akshit8/go-gin/entity"
 	"github.com/Akshit8/go-gin/service"
@@ -15,6 +16,7 @@ import (
 type VideoController interface {
 	Save(ctx *gin.Context) error
 	FindAll() []*entity.Video
+	ShowAll(ctx *gin.Context)
 }
 
 type controller struct {
@@ -50,4 +52,13 @@ func (c *controller) Save(ctx *gin.Context) error{
 
 func (c *controller) FindAll() []*entity.Video {
 	return c.service.FindAll()
+}
+
+func (c *controller) ShowAll(ctx *gin.Context) {
+	videos := c.service.FindAll()
+	data := gin.H{
+		"title": "Video Page",
+		"videos": videos,
+	}
+	ctx.HTML(http.StatusOK, "index.html", data)
 }
