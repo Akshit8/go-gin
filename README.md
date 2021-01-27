@@ -6,11 +6,15 @@ Interface in golang provides an easy way to create abstraction between different
 <br>
 An interface neither have any memory associated nor can be pointer by a pointer, for reference see `controller/video.go` **controller** struct. 
 
+## When to avoid passing pointers to functions?
+Methods and function that bind or marshal JSON structure to golang struct would not execute properly when passed pointers, as they expect interface. To optimize the function pass reference should be used using **&** operator.
+
 ## Makefile specs
 - **git** - git add - commit - push commands
 - **start** - runs the main.go file
 
 ## References
+[gindump](https://github.com/tpkeeper/gin-dump)
 
 ## Author
 **Akshit Sadana <akshitsadana@gmail.com>**

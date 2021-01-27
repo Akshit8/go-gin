@@ -2,14 +2,18 @@
 package controller
 
 import (
+	"log"
+
 	"github.com/Akshit8/go-gin/entity"
 	"github.com/Akshit8/go-gin/service"
+	"github.com/Akshit8/go-gin/validators"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 // VideoController defines methods availaible
 type VideoController interface {
-	Save(ctx *gin.Context) *entity.Video
+	Save(ctx *gin.Context) error
 	FindAll() []*entity.Video
 }
 
@@ -17,18 +21,31 @@ type controller struct {
 	service service.VideoService
 }
 
+var validate *validator.Validate
+
 // NewVideoController inits new controller for resource video
 func NewVideoController(service service.VideoService) VideoController {
+	validate = validator.New()
+	validate.RegisterValidation("cool", validators.ValidateCoolTitle)
 	return &controller{
 		service: service,
 	}
 }
 
-func (c *controller) Save(ctx *gin.Context) *entity.Video {
-	var video *entity.Video
-	ctx.BindJSON(&video)
-	c.service.Save(video)
-	return video
+func (c *controller) Save(ctx *gin.Context) error{
+	var video entity.Video
+	err := ctx.BindJSON(&video)
+	if err != nil {
+		log.Print("error in binding")
+		return err
+	}
+	err = validate.Struct(video)
+	if err != nil {
+		log.Print("error in validation")
+		return err
+	}
+	c.service.Save(&video)
+	return nil
 }
 
 func (c *controller) FindAll() []*entity.Video {
