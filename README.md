@@ -14,6 +14,10 @@ Methods and function that bind or marshal JSON structure to golang struct would 
 - the update method requires whole video entity for update, **as we are using save method**, better way is to use **Update()** method.
 - the error handling not setup right
 - **Upsert** strategy is basically checking first that there are no users with that email, in that case insert that element, otherwise update the existing element. **fix for foreign key relation**
+- removal of *UNIQUE* constraint from email can also produce right behaviour.
+
+## BBD with ginkgo gomega
+*TODO*
 
 ## Makefile specs
 - **git** - git add - commit - push commands
