@@ -5,3 +5,8 @@ git:
 
 start:
 	go run main.go
+
+swagger: 
+	swag init
+
+.PHONY: git start swagger
