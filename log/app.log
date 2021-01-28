@@ -10,4 +10,13 @@
 [GIN-debug] GET    /view/videos              --> github.com/Akshit8/go-gin/controller.VideoController.ShowAll-fm (3 handlers)
 [GIN-debug] GET    /api/videos               --> main.main.func2 (4 handlers)
 [GIN-debug] POST   /api/videos               --> main.main.func3 (4 handlers)
+[GIN-debug] GET    /api/videos/:id           --> main.main.func4 (4 handlers)
+[GIN-debug] PUT    /api/videos/:id           --> main.main.func5 (4 handlers)
+[GIN-debug] DELETE /api/videos/:id           --> main.main.func6 (4 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
+127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 4.09714ms 
+127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 5.193772ms 
+127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 5.644328ms 
+127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 10.711182ms 
+127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 9.487041ms 
+127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 7.862137ms 

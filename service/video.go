@@ -8,7 +8,7 @@ import (
 
 // VideoService interface defines availaible methods
 type VideoService interface {
-	Save(video entity.Video) entity.Video
+	Save(video entity.Video)
 	Get(video entity.Video) entity.Video
 	FindAll() []entity.Video
 	Update(video entity.Video)
@@ -26,9 +26,8 @@ func NewVideoService(videoRepository repository.VideoRepository) VideoService {
 	}
 }
 
-func (svc *videoService) Save(video entity.Video) entity.Video {
+func (svc *videoService) Save(video entity.Video) {
 	svc.repository.Save(video)
-	return video
 }
 
 func (svc *videoService) FindAll() []entity.Video {
@@ -36,8 +35,7 @@ func (svc *videoService) FindAll() []entity.Video {
 }
 
 func (svc *videoService) Get(video entity.Video) entity.Video {
-	svc.repository.Get(video)
-	return video
+	return svc.repository.Get(video)
 }
 
 func (svc *videoService) Update(video entity.Video) {

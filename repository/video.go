@@ -2,6 +2,8 @@
 package repository
 
 import (
+	"log"
+
 	"github.com/Akshit8/go-gin/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -10,7 +12,7 @@ import (
 // VideoRepository impls video repo interface
 type VideoRepository interface {
 	Save(video entity.Video)
-	Get(video entity.Video)
+	Get(video entity.Video) entity.Video
 	FindAll() []entity.Video
 	Update(video entity.Video)
 	Delete(video entity.Video)
@@ -29,30 +31,50 @@ func NewVideoRepository(fileName string) VideoRepository {
 		panic("failed to connect to database")
 	}
 
-	db.AutoMigrate(&entity.Video{}, &entity.Person{})
+	err = db.AutoMigrate(&entity.Video{}, &entity.Person{})
+	if err != nil {
+		log.Fatal("failed to migrate db", err)
+	}
 	return &database{
 		connection: db,
 	}
 }
 
 func (db *database) Save(video entity.Video) {
-	db.connection.Create(&video)
+	log.Print("video obj before repo save: ", video)
+	result := db.connection.Create(&video)
+	if result.Error != nil {
+		log.Print("db save error: ", result.Error.Error())
+	}
 }
 
-func (db *database) Get(video entity.Video) {
-	db.connection.First(&video)
+func (db *database) Get(video entity.Video) entity.Video {
+	result := db.connection.Preload("Author").First(&video)
+	if result.Error != nil {
+		log.Print("db get error: ", result.Error.Error())
+	}
+	return video
 }
 
 func (db *database) FindAll() []entity.Video {
 	var videos []entity.Video
-	db.connection.Preload("Author").Find(&videos)
+	result := db.connection.Preload("Author").Find(&videos)
+	if result.Error != nil {
+		log.Print("db find all error: ", result.Error.Error())
+	}
 	return videos
 }
 
 func (db *database) Update(video entity.Video) {
-	db.connection.Save(&video)
+	result := db.connection.Save(&video)
+	if result.Error != nil {
+		log.Print("db update error: ", result.Error.Error())
+	}
 }
 
 func (db *database) Delete(video entity.Video) {
-	db.connection.Delete(&video, video.URL)
+	result := db.connection.Delete(&video)
+	if result.Error != nil {
+		log.Print("db delete error: ", result.Error.Error())
+	}
 }

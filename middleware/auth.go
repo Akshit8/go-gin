@@ -36,7 +36,7 @@ func AuthorizeJWT() gin.HandlerFunc {
 			return
 		}
 		claims := token.Claims.(jwt.MapClaims)
-		log.Println("Claims[Name]: ", claims["name"])
+		log.Println("Claims[Name]: ", claims["username"])
 		log.Println("Claims[Admin]: ", claims["admin"])
 		log.Println("Claims[Issuer]: ", claims["iss"])
 		log.Println("Claims[IssuedAt]: ", claims["iat"])

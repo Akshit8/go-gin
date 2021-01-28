@@ -7,14 +7,16 @@ import (
 
 	"github.com/Akshit8/go-gin/controller"
 	"github.com/Akshit8/go-gin/middleware"
+	"github.com/Akshit8/go-gin/repository"
 	"github.com/Akshit8/go-gin/service"
 	"github.com/gin-gonic/gin"
 )
 
 var (
-	videoService service.VideoService = service.NewVideoService()
-	jwtService   service.JWTService   = service.NewJWTService()
-	loginService service.LoginService = service.NewLoginService()
+	videoRepository repository.VideoRepository = repository.NewVideoRepository("sqlite/main.db")
+	videoService    service.VideoService       = service.NewVideoService(videoRepository)
+	jwtService      service.JWTService         = service.NewJWTService()
+	loginService    service.LoginService       = service.NewLoginService()
 
 	videoController controller.VideoController = controller.NewVideoController(videoService)
 	loginController controller.LoginController = controller.NewLoginController(loginService, jwtService)
@@ -83,6 +85,45 @@ func main() {
 			} else {
 				ctx.JSON(http.StatusOK, gin.H{
 					"message": "saved video successfully",
+				})
+			}
+		})
+
+		apiRoutes.GET("/videos/:id", func(ctx *gin.Context) {
+			video, err := videoController.Get(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadGateway, gin.H{
+					"error": err.Error(),
+				})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H {
+					"video": video,
+				})
+			}
+		})
+
+		apiRoutes.PUT("/videos/:id", func(ctx *gin.Context) {
+			err := videoController.Update(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadGateway, gin.H{
+					"error": err.Error(),
+				})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H {
+					"video": "video updated successfully",
+				})
+			}
+		})
+
+		apiRoutes.DELETE("/videos/:id", func(ctx *gin.Context) {
+			err := videoController.Delete(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadGateway, gin.H{
+					"error": err.Error(),
+				})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H {
+					"video": "video deleted successfully",
 				})
 			}
 		})
