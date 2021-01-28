@@ -40,6 +40,7 @@ func (db *database) Save(video entity.Video) {
 }
 
 func (db *database) Get(video entity.Video) {
+	db.connection.First(&video)
 }
 
 func (db *database) FindAll() []entity.Video {
