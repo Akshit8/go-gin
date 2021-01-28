@@ -20,10 +20,10 @@ Methods and function that bind or marshal JSON structure to golang struct would 
 - **start** - runs the main.go file
 
 ## References
-[gindump](https://github.com/tpkeeper/gin-dump)
-[jwt-go](https://github.com/dgrijalva/jwt-go)
-[gorm-docs](https://gorm.io/docs)
-[upsert-conflict](https://gorm.io/docs/create.html#upsert)
+[gindump](https://github.com/tpkeeper/gin-dump) <br>
+[jwt-go](https://github.com/dgrijalva/jwt-go) <br>
+[gorm-docs](https://gorm.io/docs) <br>
+[upsert-conflict](https://gorm.io/docs/create.html#upsert) <br>
 
 ## Author
 **Akshit Sadana <akshitsadana@gmail.com>**
