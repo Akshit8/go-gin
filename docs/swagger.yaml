@@ -99,6 +99,7 @@ paths:
       tags:
       - videos
       - list
+  /videos/:
     post:
       consumes:
       - application/json
@@ -161,6 +162,32 @@ paths:
       - bearerAuth: []
       - bearerAuth: []
       summary: Remove videos
+      tags:
+      - videos
+    get:
+      consumes:
+      - application/json
+      description: Get a video for a id
+      parameters:
+      - description: Video ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Video'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/entity.Response'
+      security:
+      - bearerAuth: []
+      summary: return a single videos
       tags:
       - videos
     put:

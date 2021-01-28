@@ -1,10 +1,10 @@
 [GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
 [GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
 [GIN-debug] Loaded HTML Templates (4): 
-	- index.html
 	- 
 	- footer.html
 	- header.html
+	- index.html
 
 [GIN-debug] GET    /view/videos              --> github.com/Akshit8/go-gin/controller.VideoController.ShowAll-fm (3 handlers)
 [GIN-debug] POST   /api/v1/auth/login        --> github.com/Akshit8/go-gin/api.(*VideoAPI).Authenticate-fm (3 handlers)
@@ -15,12 +15,9 @@
 [GIN-debug] DELETE /api/v1/videos/:id        --> github.com/Akshit8/go-gin/api.(*VideoAPI).DeleteVideo-fm (4 handlers)
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
-[GIN-debug] redirecting request 301: /swagger/ --> /swagger/
-127.0.0.1 - [28 Jan 21 15:01 UTC] GET /swagger/ 404 11.397µs 
-127.0.0.1 - [28 Jan 21 15:02 UTC] GET /swagger/any 404 10.347µs 
-127.0.0.1 - [28 Jan 21 15:03 UTC] GET /swagger/index.html 200 1.410772ms 
-127.0.0.1 - [28 Jan 21 15:03 UTC] GET /swagger/swagger-ui.css 200 3.527047ms 
-127.0.0.1 - [28 Jan 21 15:03 UTC] GET /swagger/swagger-ui-bundle.js 200 159.53859ms 
-127.0.0.1 - [28 Jan 21 15:03 UTC] GET /swagger/swagger-ui-standalone-preset.js 200 78.137699ms 
-127.0.0.1 - [28 Jan 21 15:03 UTC] GET /swagger/doc.json 200 2.959918ms 
-127.0.0.1 - [28 Jan 21 15:03 UTC] GET /swagger/favicon-32x32.png 200 17.953009ms 
+127.0.0.1 - [28 Jan 21 16:13 UTC] GET /swagger/index.html 200 1.836168ms 
+127.0.0.1 - [28 Jan 21 16:13 UTC] GET /swagger/swagger-ui.css 200 3.252014ms 
+127.0.0.1 - [28 Jan 21 16:13 UTC] GET /swagger/swagger-ui-bundle.js 200 96.172134ms 
+127.0.0.1 - [28 Jan 21 16:13 UTC] GET /swagger/swagger-ui-standalone-preset.js 200 624.712µs 
+127.0.0.1 - [28 Jan 21 16:13 UTC] GET /swagger/doc.json 200 2.528852ms 
+127.0.0.1 - [28 Jan 21 16:13 UTC] GET /swagger/favicon-32x32.png 200 46.631886ms 

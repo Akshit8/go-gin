@@ -18,12 +18,14 @@ Methods and function that bind or marshal JSON structure to golang struct would 
 ## Makefile specs
 - **git** - git add - commit - push commands
 - **start** - runs the main.go file
+- **swag** - generate swagger api documentation
 
 ## References
 [gindump](https://github.com/tpkeeper/gin-dump) <br>
 [jwt-go](https://github.com/dgrijalva/jwt-go) <br>
 [gorm-docs](https://gorm.io/docs) <br>
 [upsert-conflict](https://gorm.io/docs/create.html#upsert) <br>
+[swag](https://github.com/swaggo/swag#getting-started)
 
 ## Author
 **Akshit Sadana <akshitsadana@gmail.com>**

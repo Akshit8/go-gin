@@ -68,6 +68,16 @@ func (api *VideoAPI) AllVideos(ctx *gin.Context) {
 }
 
 // GetVideo godoc
+// @Security bearerAuth
+// @Summary return a single videos
+// @Description Get a video for a id
+// @Tags videos
+// @Accept  json
+// @Produce  json
+// @Param  id path int true "Video ID"
+// @Success 200 {object} entity.Video
+// @Failure 401 {object} entity.Response
+// @Router /videos/{id} [get]
 func (api *VideoAPI) GetVideo(ctx *gin.Context) {
 	video, err := api.videoController.Get(ctx)
 	if err != nil {
@@ -92,7 +102,7 @@ func (api *VideoAPI) GetVideo(ctx *gin.Context) {
 // @Success 200 {object} entity.Response
 // @Failure 400 {object} entity.Response
 // @Failure 401 {object} entity.Response
-// @Router /videos [post]
+// @Router /videos/ [post]
 func (api *VideoAPI) CreateVideo(ctx *gin.Context) {
 	err := api.videoController.Save(ctx)
 	if err != nil {
