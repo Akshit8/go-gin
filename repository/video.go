@@ -7,6 +7,7 @@ import (
 	"github.com/Akshit8/go-gin/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 // VideoRepository impls video repo interface
@@ -42,7 +43,7 @@ func NewVideoRepository(fileName string) VideoRepository {
 
 func (db *database) Save(video entity.Video) {
 	log.Print("video obj before repo save: ", video)
-	result := db.connection.Create(&video)
+	result := db.connection.Clauses(clause.OnConflict{DoNothing: true}).Create(&video)
 	if result.Error != nil {
 		log.Print("db save error: ", result.Error.Error())
 	}
