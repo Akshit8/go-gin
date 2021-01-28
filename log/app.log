@@ -14,9 +14,10 @@
 [GIN-debug] PUT    /api/videos/:id           --> main.main.func5 (4 handlers)
 [GIN-debug] DELETE /api/videos/:id           --> main.main.func6 (4 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
-127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 4.09714ms 
-127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 5.193772ms 
-127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 5.644328ms 
-127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 10.711182ms 
-127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 9.487041ms 
-127.0.0.1 - [28 Jan 21 13:42 UTC] GET /api/videos/3 200 7.862137ms 
+127.0.0.1 - [28 Jan 21 14:00 UTC] GET /api/videos 200 8.277892ms 
+127.0.0.1 - [28 Jan 21 14:00 UTC] POST /api/videos 200 405.226893ms 
+127.0.0.1 - [28 Jan 21 14:00 UTC] GET /api/videos 200 43.840565ms 
+127.0.0.1 - [28 Jan 21 14:02 UTC] POST /api/videos 200 12.846786ms 
+127.0.0.1 - [28 Jan 21 14:02 UTC] GET /view/videos 200 28.822837ms 
+127.0.0.1 - [28 Jan 21 14:03 UTC] POST /api/videos 200 291.134375ms 
+127.0.0.1 - [28 Jan 21 14:03 UTC] GET /api/videos 200 31.32619ms 
