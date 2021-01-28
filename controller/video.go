@@ -15,7 +15,7 @@ import (
 // VideoController defines methods availaible
 type VideoController interface {
 	Save(ctx *gin.Context) error
-	FindAll() []*entity.Video
+	FindAll() []entity.Video
 	ShowAll(ctx *gin.Context)
 }
 
@@ -46,11 +46,11 @@ func (c *controller) Save(ctx *gin.Context) error{
 		log.Print("error in validation")
 		return err
 	}
-	c.service.Save(&video)
+	c.service.Save(video)
 	return nil
 }
 
-func (c *controller) FindAll() []*entity.Video {
+func (c *controller) FindAll() []entity.Video {
 	return c.service.FindAll()
 }
 

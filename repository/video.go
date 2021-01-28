@@ -23,8 +23,8 @@ type database struct {
 }
 
 // NewVideoRepository inits a new VideoRepository
-func NewVideoRepository() VideoRepository {
-	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+func NewVideoRepository(fileName string) VideoRepository {
+	db, err := gorm.Open(sqlite.Open(fileName), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect to database")
 	}

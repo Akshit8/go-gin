@@ -1,30 +1,49 @@
 // Package service implements video-api servicec
 package service
 
-import "github.com/Akshit8/go-gin/entity"
+import (
+	"github.com/Akshit8/go-gin/entity"
+	"github.com/Akshit8/go-gin/repository"
+)
 
 // VideoService interface defines availaible methods
 type VideoService interface {
-	Save(video *entity.Video) *entity.Video
-	FindAll() []*entity.Video
+	Save(video entity.Video) entity.Video
+	Get(video entity.Video) entity.Video
+	FindAll() []entity.Video
+	Update(video entity.Video)
+	Delete(video entity.Video)
 }
 
 type videoService struct {
-	videos []*entity.Video
+	repository repository.VideoRepository
 }
 
 // NewVideoService inits videService
-func NewVideoService() VideoService {
+func NewVideoService(videoRepository repository.VideoRepository) VideoService {
 	return &videoService{
-		videos: []*entity.Video{},
+		repository: videoRepository,
 	}
 }
 
-func (svc *videoService) Save(video *entity.Video) *entity.Video {
-	svc.videos = append(svc.videos, video)
+func (svc *videoService) Save(video entity.Video) entity.Video {
+	svc.repository.Save(video)
 	return video
 }
 
-func (svc *videoService) FindAll() []*entity.Video {
-	return svc.videos
+func (svc *videoService) FindAll() []entity.Video {
+	return svc.repository.FindAll()
+}
+
+func (svc *videoService) Get(video entity.Video) entity.Video {
+	svc.repository.Get(video)
+	return video
+}
+
+func (svc *videoService) Update(video entity.Video) {
+	svc.repository.Update(video)
+}
+
+func (svc *videoService) Delete(video entity.Video) {
+	svc.repository.Delete(video)
 }
